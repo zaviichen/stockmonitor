@@ -1,0 +1,45 @@
+﻿<Window x:Class="StockMonitor.View.StockGridView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+        <Border BorderThickness="2" BorderBrush="AliceBlue" Margin="10">
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                <Label Margin="2" VerticalAlignment="Center">Time Range:</Label>
+                <DatePicker Margin="2" Name="StartTimeDatePicker"></DatePicker>
+                <Label Margin="2" VerticalAlignment="Center">-</Label>
+                <DatePicker Margin="2" Name="EndTimeDatePicker"></DatePicker>
+                <Button Width="60" Name="FilterBtn" Margin="2"
+                        Click="FilterBtn_Click">Filter</Button>
+                <Button Width="60" Name="RevertBtn" Margin="2"
+                        Click="RevertBtn_Click">Reset</Button>
+                <Button Width="60" Name="ExportBtn" Margin="2"
+                        Click="ExportBtn_Click">Export</Button>
+                <Label Margin="10,2,2,2" VerticalAlignment="Center">Records: </Label>
+                <TextBlock Margin="2" VerticalAlignment="Center" Name="RecordText"></TextBlock>
+            </StackPanel>
+        </Border>
+
+        <DataGrid x:Name="StockGrid" Grid.Row="1" Margin="5"
+                         AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Date" Binding="{Binding Path=Date}" Width="*"/>
+                <DataGridTextColumn Header="Open" Binding="{Binding Path=Open}" Width="*"/>
+                <DataGridTextColumn Header="Close" Binding="{Binding Path=Close}" Width="*"/>
+                <DataGridTextColumn Header="High" Binding="{Binding Path=High}" Width="*"/>
+                <DataGridTextColumn Header="Low" Binding="{Binding Path=Low}" Width="*"/>
+                <DataGridTextColumn Header="Volume" Binding="{Binding Path=Volume}" Width="*"/>
+                <DataGridTextColumn Header="Moving Average" Binding="{Binding Path=MA}" Width="*"/>
+                <DataGridTextColumn Header="Volatility" Binding="{Binding Path=Volatility}" Width="*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Window>

@@ -1,0 +1,112 @@
+﻿<UserControl x:Class="StockMonitor.View.StockChartView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:ams="http://schemas.amcharts.com/stock/wpf/2009/xaml" 
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid>
+        <ams:StockChart Name="stockChart" DataSetSelectorVisibility="Collapsed">
+            <ams:StockChart.DataSets>
+                <ams:DataSet Name="stockSet1" Brush="#7f8da9"
+                                     DateMemberPath="Date"
+                                     OpenMemberPath="Open"
+                                     HighMemberPath="High"
+                                     LowMemberPath="Low"
+                                     CloseMemberPath="Close"
+                                     ValueMemberPath="Close"
+                                     VolumeMemberPath="Volume">
+                </ams:DataSet>
+                <ams:DataSet Name="maSet" Brush="#7f8da9"
+                                     DateMemberPath="Date"
+                                     ValueMemberPath="MA">
+                </ams:DataSet>
+                <ams:DataSet Name="volSet" Brush="#7f8da9"
+                                     DateMemberPath="Date"
+                                     ValueMemberPath="Volatility">
+                </ams:DataSet>
+            </ams:StockChart.DataSets>
+
+            <ams:StockChart.Charts>
+                <ams:Chart GridHeight="3*">
+                    <ams:Chart.Graphs>
+                        <ams:Graph Name="candleGraph"
+                                           Title="Price"
+                                           Visibility="Visible"
+                                           GraphType="Candlestick"
+                                           LegendItemType="Ohlc"
+                                           LegendPeriodItemType="Ohlc"
+                                           CursorBrush="Blue" CursorSize="6">
+                        </ams:Graph>
+                        <ams:Graph Name="indMAGraph"
+                                           Title="Moving Average"
+                                           GraphType="Line"
+                                           LegendItemType="Value" 
+                                           LegendPeriodItemType="Value"
+                                           DataField="Value"
+                                           Brush="Orange"
+                                           CursorBrush="Blue" CursorSize="6">
+                        </ams:Graph>
+                    </ams:Chart.Graphs>
+
+                    <ams:Chart.DateTimeAxis>
+                        <ams:DateTimeAxis ValuesForeground="#90000000" StrokeThickness="0" TickLength="0">
+                        </ams:DateTimeAxis>
+                    </ams:Chart.DateTimeAxis>
+
+                    <ams:Chart.LeftValueAxis>
+                        <ams:ValueAxis ValuesForeground="#90000000"
+                                               StrokeThickness="0" TickLength="0" />
+                    </ams:Chart.LeftValueAxis>
+
+                    <ams:Chart.Legend>
+                        <ams:Legend PositiveValueForeground="Red" NegativeValueForeground="Green"
+                                            IsDateVisible="True"/>
+                    </ams:Chart.Legend>
+                </ams:Chart>
+
+                <ams:Chart Name="volumnChart" Title="Volume" GridHeight="*">
+                    <ams:Chart.Graphs>
+                        <ams:Graph GraphType="Column"
+                                           LegendItemType="Value"
+                                           LegendPeriodItemType="Value"
+                                           DataField="Volume" PeriodValue="Last"
+                                           Brush="LightBlue"
+                                           CursorBrush="Blue" CursorSize="6">
+                        </ams:Graph>
+                    </ams:Chart.Graphs>
+                </ams:Chart>
+
+                <ams:Chart Name="volChart" Title="Volatility" GridHeight="*">
+                    <ams:Chart.Graphs>
+                        <ams:Graph Name="volGraph"
+                                           GraphType="Line"
+                                           LegendItemType="Value"
+                                           LegendPeriodItemType="Value"
+                                           DataField="Value" PeriodValue="Last"
+                                           Brush="Red"
+                                           CursorBrush="Blue" CursorSize="6">
+                        </ams:Graph>
+                    </ams:Chart.Graphs>
+                </ams:Chart>
+            </ams:StockChart.Charts>
+
+            <ams:StockChart.PeriodSelector>
+                <ams:PeriodSelector CustomPeriodVisibility="Visible" 
+                                    CustomPeriodLabelText="Custom Period"
+                                    PresetPeriodLabelText="Scale:"
+                                    Margin="5">
+                    <ams:PeriodSelector.PresetPeriods>
+                        <ams:PresetPeriodButton Interval="Day" Quantity="5" Content="5d" Width="30"/>
+                        <ams:PresetPeriodButton Interval="Day" Quantity="10" Content="10d" Width="30"/>
+                        <ams:PresetPeriodButton Interval="Month" Quantity="1" Content="1m" Width="30"/>
+                        <ams:PresetPeriodButton Interval="Month" Quantity="3" Content="3m" Width="30"/>
+                        <ams:PresetPeriodButton Interval="Year" Quantity="1" Content="1y" Width="30"/>
+                        <ams:PresetPeriodButton Quantity="NaN" Content="All" Width="30"/>
+                    </ams:PeriodSelector.PresetPeriods>
+                </ams:PeriodSelector>
+            </ams:StockChart.PeriodSelector>
+        </ams:StockChart>
+    </Grid>
+</UserControl>
